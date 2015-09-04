@@ -1,9 +1,9 @@
 package services;
 
-import com.sun.deploy.util.StringUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import org.apache.commons.lang3.StringUtils;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Arrays;
