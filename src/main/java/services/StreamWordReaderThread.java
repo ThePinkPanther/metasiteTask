@@ -1,10 +1,9 @@
 package services;
 
-import utils.Consumer;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.util.function.Consumer;
 
 /**
  * @author ben
@@ -17,14 +16,17 @@ public class StreamWordReaderThread extends Thread {
     private static final Charset DEFAULT_CHARSET = Charset.defaultCharset();
     private volatile static long threadPrefix = 1;
     private final InputStream inputStream;
-    private Consumer<String> wordConsumer;
+    private final Consumer<String> wordConsumer;
 
-    public StreamWordReaderThread(InputStream stream) {
-        this(stream, DEFAULT_BUFFER_SIZE);
+    public StreamWordReaderThread(InputStream stream, Consumer<String> consumer) {
+        this(stream, consumer, DEFAULT_BUFFER_SIZE);
     }
 
-    public StreamWordReaderThread(InputStream stream, int bufferSize) {
+    public StreamWordReaderThread(InputStream stream,
+                                  Consumer<String> consumer,
+                                  int bufferSize) {
         setName(generateThreadName());
+        wordConsumer = consumer;
         inputStream = stream;
     }
 
@@ -37,19 +39,11 @@ public class StreamWordReaderThread extends Thread {
         return String.format(THREAD_NAME, ++threadPrefix);
     }
 
-    public Consumer<String> getWordConsumer() {
-        return wordConsumer;
-    }
-
-    public void setWordConsumer(Consumer<String> wordConsumer) {
-        this.wordConsumer = wordConsumer;
-    }
-
     @Override
     public void run() {
         try (WordProcessor processor = new WordProcessor(DEFAULT_CHARSET, wordConsumer)) {
             // Buffer to read the stream
-            byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
+            final byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
 
             // Number of bytes read from the stream
             int bytesRead;
@@ -64,6 +58,9 @@ public class StreamWordReaderThread extends Thread {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        synchronized (this) {
+            notifyAll();
         }
     }
 

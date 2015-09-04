@@ -1,17 +1,17 @@
 package services;
 
-import utils.Consumer;
-
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
+import java.io.Flushable;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.function.Consumer;
 
 /**
  * @author ben
  * @version 1.0
  */
-public class WordProcessor implements Closeable {
+public class WordProcessor implements Closeable, Flushable {
 
     private final Charset charset;
     private final ByteArrayOutputStream wordHolder = new ByteArrayOutputStream();
@@ -23,11 +23,13 @@ public class WordProcessor implements Closeable {
     }
 
     public void feed(byte b) {
-        // Split words with whitespaces
-        if (isWhitespace(b) && wordHolder.size() != 0) {
-            wordConsumer.consume(new String(wordHolder.toByteArray(), charset));
-        } else {
-            wordHolder.write(b);
+        synchronized (this) {
+            // Split words with whitespaces
+            if (isWhitespace(b)) {
+                nextWord();
+            } else {
+                wordHolder.write(b);
+            }
         }
     }
 
@@ -35,8 +37,21 @@ public class WordProcessor implements Closeable {
         return b == ' ' || b == '\n' || b == '\t';
     }
 
+    private void nextWord() {
+        if (wordHolder.size() != 0) {
+            wordConsumer.accept(new String(wordHolder.toByteArray(), charset));
+            wordHolder.reset();
+        }
+    }
+
     @Override
     public void close() throws IOException {
+        flush();
         wordHolder.close();
+    }
+
+    @Override
+    public void flush() throws IOException {
+        nextWord();
     }
 }
