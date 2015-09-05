@@ -13,6 +13,8 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
+apply plugin: 'application'
+
 jar {
     baseName = 'metasite-task'
     version =  '0.1.0'
@@ -30,9 +32,23 @@ dependencies {
     // Spring boot
     compile "org.springframework.boot:spring-boot-starter-web"
 
+    //String utils
+    compile 'org.apache.commons:commons-lang3:3.0'
+
+
     // JUnit
     testCompile "junit:junit"
 
+    // For file comparing in test cases
+    testCompile 'commons-io:commons-io:2.4'
+}
+
+bootRun {
+    args 'files/uploaded/', 'files/generated/'
+}
+
+springBoot {
+    mainClass = "metasiteTask.Application"
 }
 
 task wrapper(type: Wrapper) {
