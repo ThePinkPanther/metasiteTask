@@ -35,7 +35,6 @@ dependencies {
     //String utils
     compile 'org.apache.commons:commons-lang3:3.0'
 
-
     // JUnit
     testCompile "junit:junit"
 

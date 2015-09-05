@@ -1,3 +1,11 @@
+To run tests:
+<pre>./gradlew test</pre>
+
+To run server:
+<pre>./gradlew bootRun</pre>
+
+<hr/>
+
 Užduotis kandidatui į Java programuotojo vietą
 
 Suprogramuoti žodžių skaičiavimo algoritmą:
