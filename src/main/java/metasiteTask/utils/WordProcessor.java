@@ -1,4 +1,4 @@
-package services;
+package metasiteTask.utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
@@ -22,6 +22,10 @@ public class WordProcessor implements Closeable, Flushable {
         this.wordConsumer = wordConsumer;
     }
 
+    /**
+     * Concatinates letters to words and sends them to word consumer.
+     * @param b byte to feed
+     */
     public void feed(byte b) {
         synchronized (this) {
             // Split words with whitespaces

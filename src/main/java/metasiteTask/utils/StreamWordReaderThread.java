@@ -1,4 +1,4 @@
-package services;
+package metasiteTask.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -59,6 +59,7 @@ public class StreamWordReaderThread extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        // Signal everyone waiting on this object
         synchronized (this) {
             notifyAll();
         }

@@ -1,5 +1,6 @@
-package services;
+package metasiteTask.utils;
 
+import metasiteTask.utils.StreamWordReaderThread;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
