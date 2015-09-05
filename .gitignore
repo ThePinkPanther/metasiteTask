@@ -1,3 +1,5 @@
+files/
+
 # Created by .ignore support plugin (hsz.mobi)
 ### Java template
 *.class
@@ -19,6 +21,7 @@ hs_err_pid*
 
 ## Directory-based project format:
 .idea/
+build
 # if you remove the above rule, at least ignore the following:
 
 # User-specific stuff:
@@ -36,6 +39,7 @@ hs_err_pid*
 # Gradle:
 # .idea/gradle.xml
 # .idea/libraries
+.gradle
 !gradle/wrapper/gradle-wrapper.jar
 
 # Mongo Explorer plugin:
