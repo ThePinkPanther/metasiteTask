@@ -18,12 +18,7 @@ public class WordFilterService {
 
     private final FileService fileReader;
     private final FileService fileWriter;
-    WordCounterFilter[] filters = new WordCounterFilter[]{
-            new WordCounterFilter("^[a-g]\\w*"),
-            new WordCounterFilter("^[h-n]\\w*"),
-            new WordCounterFilter("^[o-u]\\w*"),
-            new WordCounterFilter("^[v-z]\\w*")
-    };
+    final Collection<WordCounterFilter> filters;
     private volatile boolean isRunning = false;
 
     /**
@@ -36,9 +31,10 @@ public class WordFilterService {
         }
     };
 
-    public WordFilterService(FileService fileReader, FileService fileWriter) {
+    public WordFilterService(FileService fileReader, FileService fileWriter, Collection<WordCounterFilter> filters) {
         this.fileReader = fileReader;
         this.fileWriter = fileWriter;
+        this.filters = filters;
     }
 
     /**
