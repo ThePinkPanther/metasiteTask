@@ -4,6 +4,8 @@ To run tests:
 To run server:
 <pre>./gradlew bootRun</pre>
 
+Then visit <a href="localhost:8080/">localhost:8080/</a>
+
 <hr/>
 
 Užduotis kandidatui į Java programuotojo vietą
