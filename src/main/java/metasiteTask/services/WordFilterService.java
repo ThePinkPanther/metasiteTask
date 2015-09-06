@@ -12,7 +12,7 @@ import java.util.function.Consumer;
 
 /**
  * @author ben
- * @version 1.0
+ * @version 1.0.1
  */
 public class WordFilterService {
 
@@ -111,7 +111,7 @@ public class WordFilterService {
         for (WordCounterFilter filter : filters) {
             File file = null;
             try {
-                file = fileWriter.getFileHandle(filter.getPattern()+".csv");
+                file = fileWriter.getFileHandle(WordCounterFilter.clean(filter.getPattern()));
                 Thread thread = new StreamWordWriterThread(
                         new FileOutputStream(file),
                         filter.getWords());

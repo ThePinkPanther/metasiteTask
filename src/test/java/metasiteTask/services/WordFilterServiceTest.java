@@ -54,7 +54,7 @@ public class WordFilterServiceTest {
         filterService.start();
         final File f;
         try {
-            f = testFiles.getFile(PATTERN+".csv");
+            f = testFiles.getFile(WordCounterFilter.clean(PATTERN));
         } catch (FileNotFoundException e) {
             fail("Failed to generate file");
             return;
@@ -71,6 +71,5 @@ public class WordFilterServiceTest {
         assertEquals(WORD_COUNT, count);
 
     }
-
 
 }
