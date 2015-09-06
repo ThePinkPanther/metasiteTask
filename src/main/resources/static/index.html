@@ -1,10 +1,34 @@
 <html>
-<body>
-<form method="POST" enctype="multipart/form-data"
-      action="/files/user">
-        File to upload: <input type="file" name="file"><br /> Name: <input
-        type="text" name="name"><br /> <br /> <input type="submit"
-                                                     value="Upload"> Press here to upload the file!
-</form>
-</body>
+    <head>
+        <!-- Import jquery-->
+        <script src="js/lib/jquery/jquery.min.js"></script>
+        <!-- Main js -->
+        <script src="js/main.js"></script>
+
+        <!-- Reset css-->
+        <link rel="stylesheet" type="text/css" href="css/reset.css">
+        <!-- Main stylesheet-->
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+    </head>
+    <body>
+        <div id="pageWrapper">
+            <div class="uploadFileForm block">
+                <form method="POST" enctype="multipart/form-data" action="/files/user">
+                    Name:
+                    <input id="name" type="text" name="name"><br/>
+                    <input id="file" type="file" name="file" class="button"><br/>
+                    <input type="submit" value="Upload" class="button">
+                </form>
+                <div class="button" onclick="generateFiles()">Generate files</div>
+            </div>
+            <div class="block">
+                User files
+                <div id="userFilesContainer" ></div>
+            </div>
+            <div class="block">
+                Generated files
+                <div id="generatedFilesContainer" ></div>
+            </div>
+        </div>
+    </body>
 </html>
