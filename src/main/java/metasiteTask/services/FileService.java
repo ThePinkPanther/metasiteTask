@@ -47,6 +47,12 @@ public class FileService {
         throw new FileNotFoundException();
     }
 
+    /**
+     * Returns file if exists, if not creates a new file instead
+     * @param name file name
+     * @return file handle
+     * @throws IOException
+     */
     public File getFileHandle(final String name)
             throws IOException {
         File file = new File(directory+name);
