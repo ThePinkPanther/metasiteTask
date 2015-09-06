@@ -1,8 +1,9 @@
 package metasiteTask;
 
+import metasiteTask.services.FileService;
+import metasiteTask.services.WordFilterService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import metasiteTask.services.FileService;
 
 /**
  * @author ben
@@ -14,6 +15,7 @@ public class Application {
 
     private static FileService userFileService;
     private static FileService generatedFileService;
+    private static WordFilterService filterService;
 
     public static FileService getUserFileService() {
         return userFileService;
@@ -21,6 +23,10 @@ public class Application {
 
     public static FileService getGeneratedFileService() {
         return generatedFileService;
+    }
+
+    public static WordFilterService getFilterService() {
+        return filterService;
     }
 
     public static void main(String[] args) {
@@ -33,14 +39,14 @@ public class Application {
         if (args.length >= 2)
             generatedDir = args[1];
 
-        // Load metasiteTask.services
+        // Load metasiteTask services
         userFileService = new FileService(uploadDir);
         generatedFileService = new FileService(generatedDir);
+        filterService = new WordFilterService(userFileService, generatedFileService);
 
         // Run Spring
         SpringApplication.run(Application.class, args);
     }
-
 
 
 }
