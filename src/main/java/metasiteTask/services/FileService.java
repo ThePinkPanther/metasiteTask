@@ -47,6 +47,23 @@ public class FileService {
         throw new FileNotFoundException();
     }
 
+    public File getFileHandle(final String name)
+            throws IOException {
+        File file = new File(directory+name);
+        if(file.isDirectory())
+            throw new IOException("Couldn't get a handle for file: "+name+". It's a directory");
+        if (!file.exists() ) {
+            file.createNewFile();
+        }
+        return file;
+    }
+
+    /**
+     * Saves given byte array to a file
+     * @param data
+     * @param name
+     * @throws IOException
+     */
     public void save(final byte[] data, final String name)
             throws IOException {
         File file = new File(directory + name);
