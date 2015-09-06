@@ -18,8 +18,14 @@ public class WordFilterService {
 
     private final FileService fileReader;
     private final FileService fileWriter;
-    final Collection<WordCounterFilter> filters;
+    Collection<WordCounterFilter> filters;
     private volatile boolean isRunning = false;
+
+    public WordFilterService(FileService fileReader, FileService fileWriter, Collection<WordCounterFilter> filters) {
+        this.fileReader = fileReader;
+        this.fileWriter = fileWriter;
+        this.filters = filters;
+    }
 
     /**
      * Sends read words to word filters
@@ -30,12 +36,6 @@ public class WordFilterService {
             if (filter.consume(word)) break;
         }
     };
-
-    public WordFilterService(FileService fileReader, FileService fileWriter, Collection<WordCounterFilter> filters) {
-        this.fileReader = fileReader;
-        this.fileWriter = fileWriter;
-        this.filters = filters;
-    }
 
     /**
      * Checks if word filter procedure is running
