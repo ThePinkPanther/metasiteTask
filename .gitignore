@@ -46,6 +46,7 @@ build
 # .idea/mongoSettings.xml
 
 ## File-based project format:
+/files
 *.ipr
 *.iws
 
