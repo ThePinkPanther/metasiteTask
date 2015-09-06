@@ -4,7 +4,7 @@ To run tests:
 To run server:
 <pre>./gradlew bootRun</pre>
 
-Then visit <a href="localhost:8080/">localhost:8080/</a>
+Then visit <a href="http://localhost:8080/">http://localhost:8080/</a>
 
 <hr/>
 
