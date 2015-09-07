@@ -6,6 +6,8 @@ To run server:
 
 Then visit <a href="http://localhost:8080/">http://localhost:8080/</a>
 
+On MsWindows use <b>gradlew.bat</b> instead of <b>gradlew</b>
+
 <hr/>
 
 Užduotis kandidatui į Java programuotojo vietą
